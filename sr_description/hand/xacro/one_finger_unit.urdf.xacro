@@ -1,10 +1,12 @@
 <robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
-xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
-xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
-xmlns:xacro="http://www.ros.org/wiki/xacro">
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:xacro="http://www.ros.org/wiki/xacro">
+
   <xacro:include filename="$(find sr_description)/hand/xacro/forearm/forearm.urdf.xacro" />
   <xacro:include filename="$(find sr_description)/hand/xacro/finger/fingers.urdf.xacro" />
   <xacro:property name="M_PI" value="3.1415926535897931" />
+
   <!-- muscletrans is true for muscle transmission to be used, false to use motor transmission -->
   <!-- muscle is true for muscle hand or false for motor hand -->
   <!-- bio is true for biotac finger or false for standard finger -->
@@ -17,13 +19,14 @@ xmlns:xacro="http://www.ros.org/wiki/xacro">
   params="muscletrans muscle bio bt_sp ubi eli reflect prefix">
     <!-- Forearm -->
     <xacro:forearm muscle="${muscle}" prefix="${prefix}" />
+
     <!-- Dummy Palm -->
     <link name="${prefix}palm">
       <inertial>
         <mass value="0.010" />
         <origin xyz="0 0 0" />
         <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0"
-        izz="0.0" />
+                 izz="0.0" />
       </inertial>
       <visual>
         <origin xyz="0 0 0.0505" rpy="0 0 0" />
@@ -39,12 +42,14 @@ xmlns:xacro="http://www.ros.org/wiki/xacro">
         </geometry>
       </collision>
     </link>
+
     <joint name="${prefix}forearm_to_dummy" type="fixed">
       <parent link="${prefix}forearm" />
       <child link="${prefix}palm" />
       <origin xyz="${reflect*0.011} 0.010 0.22"
       rpy="0 0 ${M_PI}" />
     </joint>
+
     <!-- mfknuckle is at [0.011 -0.01 0.346] from the bottom of forearm -->
     <!-- Middle Finger -->
     <!-- TODO: Check if offset is the same for muscle hand -->
@@ -55,5 +60,7 @@ xmlns:xacro="http://www.ros.org/wiki/xacro">
       <origin xyz="0.0 0 0.116" rpy="0 0 0" />
       <axis xyz="0 ${-1*reflect} 0" />
     </xacro:finger>
+
   </xacro:macro>
+
 </robot>
