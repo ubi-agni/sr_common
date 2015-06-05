@@ -1,13 +1,14 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro"
-xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
-xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
-xmlns:joint="http://playerstage.sourceforge.net/gazebo/xmlschema/#slider"
-xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
-xmlns:body="http://playerstage.sourceforge.net/gazebo/xmlschema/#body"
-xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom">
+       xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:joint="http://playerstage.sourceforge.net/gazebo/xmlschema/#slider"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:body="http://playerstage.sourceforge.net/gazebo/xmlschema/#body"
+       xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom">
 
   <xacro:include filename="$(find sr_description)/hand/xacro/finger/middle/middle.gazebo.xacro" />
   <xacro:include filename="$(find sr_description)/hand/xacro/finger/middle/middle.transmission.xacro" />
+
   <!-- muscle is true for muscle hand or false for motor hand -->
   <!-- prefix can be anything but usually is "r_" or  "l_" for right and left hands distinction -->
   <!-- link_prefix prepends fingername to the link names -->
@@ -30,10 +31,9 @@ xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom">
         </geometry>
         <material name="Grey" />
       </visual>
-      <collision>
+    <collision>
         <origin xyz="0 0 0.0125" rpy="0 0 0" />
         <geometry name="${prefix}${link_prefix}middle_collision_geom">
-
           <cylinder radius="0.007" length="0.025" />
         </geometry>
       </collision>
@@ -50,6 +50,7 @@ xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom">
         </geometry>
       </collision>
     </link>
+
     <joint name="${prefix}${joint_prefix}J2" type="revolute">
       <parent link="${parent}" />
       <child link="${prefix}${link_prefix}middle" />
@@ -59,7 +60,8 @@ xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom">
       velocity="2.0" />
       <dynamics damping="0.1" />
     </joint>
-    <gazebo reference="${prefix}${joint_prefix}J2">
+
+   <gazebo reference="${prefix}${joint_prefix}J2">
       <provideFeedback>1</provideFeedback>
       <implicitSpringDamper>1</implicitSpringDamper>
     </gazebo>
@@ -70,4 +72,5 @@ xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom">
     <xacro:middle_gazebo prefix="${prefix}"
     link_prefix="${link_prefix}" />
   </xacro:macro>
+
 </robot>

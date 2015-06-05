@@ -1,14 +1,15 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro"
-xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
-xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
-xmlns:joint="http://playerstage.sourceforge.net/gazebo/xmlschema/#slider"
-xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
-xmlns:body="http://playerstage.sourceforge.net/gazebo/xmlschema/#body"
-xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom">
+       xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:joint="http://playerstage.sourceforge.net/gazebo/xmlschema/#slider"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:body="http://playerstage.sourceforge.net/gazebo/xmlschema/#body"
+       xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom">
 
   <xacro:include filename="$(find sr_description)/hand/xacro/thumb/thhub.gazebo.xacro" />
   <xacro:include filename="$(find sr_description)/hand/xacro/thumb/thhub.transmission.xacro" />
-  <!-- muscle is true for muscle hand or false for motor hand -->
+
+	<!-- muscle is true for muscle hand or false for motor hand -->
   <!-- reflect is either 1 (for right hand) or -1 (for left hand) -->
   <!-- prefix can be anything but usually is "r_" or  "l_" for right and left hands distinction -->
   <!-- parent is the parent link for the first joint -->
@@ -16,19 +17,19 @@ xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom">
   <xacro:macro name="thhub" params="muscle prefix parent is_lite">
     <link name="${prefix}thhub">
       <inertial>
-        <mass value="0.005" />
+				<mass value="0.005" />
         <origin xyz="0 0 0" rpy="0 0 0" />
         <inertia ixx="0.000001" ixy="0.0" ixz="0.0" iyy="0.000001"
         iyz="0.0" izz="0.0000003" />
       </inertial>
       <visual>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry name="${prefix}thhub_visual">
-          <box size="0.001 0.001 0.001" />
-        </geometry>
-        <material name="shadow_thhub_material">
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry name="${prefix}thhub_visual">
+					<box size="0.001 0.001 0.001" />
+				</geometry>
+				<material name="shadow_thhub_material">
           <color rgba="0.7 0.7 0.7 1.0" />
-        </material>
+				</material>
       </visual>
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
@@ -37,6 +38,7 @@ xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom">
         </geometry>
       </collision>
     </link>
+
     <xacro:if value="${is_lite}">
       <joint name="${prefix}THJ3" type="fixed">
         <parent link="${parent}" />
@@ -59,12 +61,16 @@ xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom">
         <provideFeedback>1</provideFeedback>
         <implicitSpringDamper>1</implicitSpringDamper>
       </gazebo>
+      
+      
     </xacro:unless>
-    <!-- extensions -->
+
+		<!-- extensions -->
     <xacro:unless value="${is_lite}">
       <xacro:thhub_transmission muscletrans="${muscle}"
       prefix="${prefix}" />
     </xacro:unless>
     <xacro:thhub_gazebo prefix="${prefix}" />
   </xacro:macro>
+
 </robot>
