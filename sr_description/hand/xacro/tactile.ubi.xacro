@@ -107,7 +107,12 @@
     <xacro:property name="taxel_dir" value="$(find sr_description)/hand/xacro/thumb"/>
 
     <!-- Distal  -->
+    <xacro:if value="${prefix == 'rh_'}">
+      <xacro:property name="xs" value="1023 0"/>
+    </xacro:if>
+    <xacro:unless value="${prefix == 'rh_'}">
     <xacro:property name="xs" value="0 1023"/>
+    </xacro:unless>
     <xacro:distal_tactile finger="th" taxel_data="${load_yaml(taxel_dir + '/distal.taxels.ubi.yaml')}"/>
 
   </xacro:macro>
