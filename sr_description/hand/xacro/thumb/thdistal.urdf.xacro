@@ -137,7 +137,7 @@ xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom">
             <xacro:unless value="${eli}">
               <xacro:if value="${ubi}">
                 <!-- Ubi distal -->
-                <mesh filename="package://sr_description/hand/model/TH1_z.dae"
+                <mesh filename="package://sr_description/hand/model/ubi_tactiles/ubi_thtip_visual.dae"
                       scale="0.001 0.001 0.001" />
               </xacro:if>
 	      <xacro:unless value="${ubi}">
@@ -168,7 +168,7 @@ xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom">
             <xacro:unless value="${eli}">
               <xacro:if value="${ubi}">
                 <!-- Ubi distal -->
-                <mesh filename="package://sr_description/hand/model/TH1_z.dae"
+                <mesh filename="package://sr_description/hand/model/ubi_tactiles/ubi_thtip_collision.stl"
                 scale="0.001 0.001 0.001" />
               </xacro:if>
               <xacro:unless value="${ubi}">
