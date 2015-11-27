@@ -69,19 +69,20 @@
                        meshes:=^|1 normals:=^|1">
 
     <xacro:tactile_default_params _link="distal"/>
+    <xacro:property name="tipname" value="${'thtip' if finger=='th' else 'tip'}"/>
     <xacro:property name="data" value="tactiles[${finger_no[finger]}]/distal"/>
-    <xacro:taxel data="${data}[0]" mesh="${mesh_dir}/tax_tip_0.stl"/>
-    <xacro:taxel data="${data}[1]" mesh="${mesh_dir}/tax_tip_1.stl"/>
-    <xacro:taxel data="${data}[2]" mesh="${mesh_dir}/tax_tip_2.stl"/>
-    <xacro:taxel data="${data}[3]" mesh="${mesh_dir}/tax_tip_3.stl"/>
-    <xacro:taxel data="${data}[4]" mesh="${mesh_dir}/tax_tip_4.stl"/>
-    <xacro:taxel data="${data}[5]" mesh="${mesh_dir}/tax_tip_5.stl"/>
-    <xacro:taxel data="${data}[6]" mesh="${mesh_dir}/tax_tip_6.stl"/>
-    <xacro:taxel data="${data}[7]" mesh="${mesh_dir}/tax_tip_7.stl"/>
-    <xacro:taxel data="${data}[8]" mesh="${mesh_dir}/tax_tip_8.stl"/>
-    <xacro:taxel data="${data}[9]" mesh="${mesh_dir}/tax_tip_9.stl"/>
-    <xacro:taxel data="${data}[10]" mesh="${mesh_dir}/tax_tip_10.stl"/>
-    <xacro:taxel data="${data}[11]" mesh="${mesh_dir}/tax_tip_11.stl"/>
+    <xacro:taxel data="${data}[0]" mesh="${mesh_dir}/tax_${tipname}_0.stl"/>
+    <xacro:taxel data="${data}[1]" mesh="${mesh_dir}/tax_${tipname}_1.stl"/>
+    <xacro:taxel data="${data}[2]" mesh="${mesh_dir}/tax_${tipname}_2.stl"/>
+    <xacro:taxel data="${data}[3]" mesh="${mesh_dir}/tax_${tipname}_3.stl"/>
+    <xacro:taxel data="${data}[4]" mesh="${mesh_dir}/tax_${tipname}_4.stl"/>
+    <xacro:taxel data="${data}[5]" mesh="${mesh_dir}/tax_${tipname}_5.stl"/>
+    <xacro:taxel data="${data}[6]" mesh="${mesh_dir}/tax_${tipname}_6.stl"/>
+    <xacro:taxel data="${data}[7]" mesh="${mesh_dir}/tax_${tipname}_7.stl"/>
+    <xacro:taxel data="${data}[8]" mesh="${mesh_dir}/tax_${tipname}_8.stl"/>
+    <xacro:taxel data="${data}[9]" mesh="${mesh_dir}/tax_${tipname}_9.stl"/>
+    <xacro:taxel data="${data}[10]" mesh="${mesh_dir}/tax_${tipname}_10.stl"/>
+    <xacro:taxel data="${data}[11]" mesh="${mesh_dir}/tax_${tipname}_11.stl"/>
 
   </xacro:macro>
 
@@ -113,7 +114,7 @@
     <xacro:unless value="${prefix == 'rh_'}">
     <xacro:property name="xs" value="0 1023"/>
     </xacro:unless>
-    <xacro:distal_tactile finger="th" taxel_data="${load_yaml(taxel_dir + '/distal.taxels.ubi.yaml')}"/>
+    <xacro:distal_tactile finger="th" taxel_data="${load_yaml(taxel_dir + '/thdistal.taxels.ubi.yaml')}"/>
 
   </xacro:macro>
 
