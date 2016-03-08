@@ -10,9 +10,9 @@
   <xacro:macro name="xacro:taxel_macro"
                params="idx taxel_data:=^
                        mesh:=^ mesh_scale:=^">
-    <taxel idx="${idx}">
-      <origin xyz="${' '.join([str(v) for v in taxel_data['positions'][idx]])}"
-              rpy="${' '.join([str(v) for v in taxel_data['orientations'][idx]])}" />
+    <taxel idx="${idx}"
+           xyz="${' '.join([str(v) for v in taxel_data['positions'][idx]])}"
+           rpy="${' '.join([str(v) for v in taxel_data['orientations'][idx]])}">
       <geometry>
         <mesh filename="${mesh}" scale="${mesh_scale}" />
       </geometry>
