@@ -4,11 +4,9 @@
        tactile: sensor type
        prefix:  hand prefix, usually rh_ or lh_
        reflect: +1 / -1 to indicate right / left hand
-       meshes:  create tags for mesh markers?
-       normals: create tags for arrow markers?
   -->
   <xacro:macro name="shadowhand_tactile"
-               params="tactile:=^ reflect:=^|1 prefix:=^|'' meshes:=^ normals:=^">
+               params="tactile:=^ reflect:=^|1 prefix:=^|''">
     <xacro:if value="${tactile in ['ubi']}">
       <!-- load macros specific to sensor type -->
       <xacro:include filename="$(find sr_description)/hand/xacro/tactile.${tactile}.xacro"/>
