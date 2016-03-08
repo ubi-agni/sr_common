@@ -2,46 +2,21 @@
 
   <!-- Create mesh and arrow markers for a single taxel.
        Expected parameters:
-       topic: ROS topic
-       data: data field in ROS topic stream
-       link: link name
-       ns:   marker namespace in rviz
-       xs:   raw sensor range
-       taxel_data: dict of taxel positions and normals
+       idx: the index in the channelfloat32 values
+       taxel_data: dict of taxel positions and orientations
        mesh: mesh resource
        mesh_scale: 3-dim vector for mesh scaling
-       arrow_scale: 4-dim scaling vector:
-                    len scaling, shaft thickness, head thickness, head len
-       meshes + normals = 0 | 1
   -->
-  <xacro:macro name="xacro:taxel"
-               params="topic:=^ data link:=^ ns:=^ xs:=^ taxel_data:=^
-                       mesh:=^ mesh_scale:=^ arrow_scale:=^
-                       meshes:=^ normals:=^">
-    <!-- extract channel number from data -->
-    <xacro:property name="channel" value="${data[:-1].rsplit('[',1)[1]}"/>
-
-    <xacro:if value="${meshes}">
-      <!-- mesh marker -->
-      <tactile topic="${topic}" data="${data}"
-               link="${link}" ns="meshes/${ns}" xs="${xs}">
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <geometry>
-          <mesh filename="${mesh}" scale="${mesh_scale}" />
-        </geometry>
-      </tactile>
-    </xacro:if>
-
-    <xacro:if value="${normals}">
-      <!-- arrow marker -->
-      <tactile topic="${topic}" data="${data}" link="${link}" ns="normals/${ns}" xs="${xs}">
-        <origin xyz="${' '.join([str(v) for v in taxel_data['positions'][channel]])}"/>
-        <geometry>
-          <arrow dir="${' '.join([str(v) for v in taxel_data['normals'][channel]])}"
-                 scale="${arrow_scale}"/>
-        </geometry>
-      </tactile>
-    </xacro:if>
+  <xacro:macro name="xacro:taxel_macro"
+               params="idx taxel_data:=^
+                       mesh:=^ mesh_scale:=^">
+    <taxel idx="${idx}">
+      <origin xyz="${' '.join([str(v) for v in taxel_data['positions'][idx]])}"
+              rpy="${' '.join([str(v) for v in taxel_data['orientations'][idx]])}" />
+      <geometry>
+        <mesh filename="${mesh}" scale="${mesh_scale}" />
+      </geometry>
+    </taxel>
   </xacro:macro>
 
 </taxel>
