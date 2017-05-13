@@ -6,7 +6,7 @@
        reflect: +1 / -1 to indicate right / left hand
   -->
   <xacro:macro name="shadowhand_tactile"
-               params="tactile:=^ reflect:=^|1 prefix:=^|''">
+               params="tactile:=^ reflect:=^|1 prefix:=^|'' lf:=^|1">
     <xacro:if value="${tactile in ['ubi']}">
       <!-- load macros specific to sensor type -->
       <xacro:include filename="$(find sr_description)/hand/xacro/tactile.${tactile}.xacro"/>
@@ -21,7 +21,9 @@
       <!-- Ring Finger -->
       <xacro:finger_tactile finger="rf"/>
       <!-- Little Finger  -->
-      <xacro:finger_tactile finger="lf"/>
+      <xacro:if value="${lf}">
+        <xacro:finger_tactile finger="lf"/>
+      </xacro:if>
       <!-- Thumb  -->
       <xacro:thumb_tactile/>
     </xacro:if>
