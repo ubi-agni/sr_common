@@ -34,7 +34,7 @@
 
     <xacro:tactile_default_params _link="proximal"/>
     <xacro:property name="name" value="${prefix}${finger}${tactile_name}"/>
-    <sensor name="${name}" update_rate="100" group="${finger}">
+    <sensor name="${name}_sensor" update_rate="100" group="${finger}">
       <parent link="${link}" />
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <tactile channel="${name}">
@@ -52,7 +52,7 @@
 
     <xacro:tactile_default_params _link="middle"/>
     <xacro:property name="name" value="${prefix}${finger}${tactile_name}"/>
-    <sensor name="${name}" update_rate="100" group="${finger}">
+    <sensor name="${name}_sensor" update_rate="100" group="${finger}">
       <parent link="${link}" />
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <tactile channel="${name}">
@@ -70,7 +70,7 @@
     <xacro:tactile_default_params _link="distal"/>
     <xacro:property name="name" value="${prefix}${finger}${tactile_name}"/>
     <xacro:property name="tipname" value="${'thtip' if finger=='th' else 'tip'}"/>
-    <sensor name="${name}" update_rate="100" group="${finger}">
+    <sensor name="${name}_sensor" update_rate="100" group="${finger}">
       <parent link="${link}" />
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <tactile channel="${name}">
@@ -126,7 +126,7 @@
     <xacro:property name="mesh_scale" value="${reflect*0.00101} 0.00101 0.00101"/>
 
     <!-- taxels attached to lfmetacarpal -->
-    <sensor name="${prefix}lfmetacarpal" update_rate="100" group="palm">
+    <sensor name="${prefix}lfmetacarpal_sensor" update_rate="100" group="palm">
       <parent link="${link}" />
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <tactile channel="${prefix}lfmetacarpal">
@@ -139,7 +139,7 @@
     <!-- taxels attached to palm -->
     <xacro:property name="taxel_data" value="${load_yaml(taxel_dir + '/palm.taxels.ubi.yaml')}"/>
     <xacro:property name="link" value="${prefix}palm"/>
-    <sensor name="${prefix}palm" update_rate="100" group="palm">
+    <sensor name="${prefix}palm_sensor" update_rate="100" group="palm">
       <parent link="${link}" />
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <tactile channel="${prefix}palm">
