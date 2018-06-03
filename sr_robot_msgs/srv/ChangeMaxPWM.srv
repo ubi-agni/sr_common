@@ -1,0 +1,3 @@
+int16 maxpwm               # the maximum pwm the motor can apply
+---
+bool configured            # return true if the configuration worked, false otherwise

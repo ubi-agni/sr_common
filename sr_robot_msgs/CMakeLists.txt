@@ -53,6 +53,7 @@ add_service_files(
   ChangeControlType.srv
   ChangeMotorSystemControls.srv
   ForceController.srv
+  ChangeMaxPWM.srv
   GetSegmentedLine.srv
   is_hand_occupied.srv
   ManualSelfTest.srv
