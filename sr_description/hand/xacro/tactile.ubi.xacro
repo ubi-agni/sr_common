@@ -38,9 +38,9 @@
       <parent link="${link}" />
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <tactile channel="${name}">
-        <xacro:taxel_macro idx="0" mesh="${mesh_dir}/tax_prox_r.stl"/>
-        <xacro:taxel_macro idx="1" mesh="${mesh_dir}/tax_prox_m.stl"/>
-        <xacro:taxel_macro idx="2" mesh="${mesh_dir}/tax_prox_l.stl"/>
+        <xacro:taxel_macro idx="0" mesh="${mesh_dir}/fabric/tax_prox_r.stl"/>
+        <xacro:taxel_macro idx="1" mesh="${mesh_dir}/fabric/tax_prox_m.stl"/>
+        <xacro:taxel_macro idx="2" mesh="${mesh_dir}/fabric/tax_prox_l.stl"/>
       </tactile>
     </sensor>
     
@@ -56,8 +56,8 @@
       <parent link="${link}" />
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <tactile channel="${name}">
-        <xacro:taxel_macro idx="0" mesh="${mesh_dir}/tax_mid_l.stl"/>
-        <xacro:taxel_macro idx="1" mesh="${mesh_dir}/tax_mid_r.stl"/>
+        <xacro:taxel_macro idx="0" mesh="${mesh_dir}/fabric/tax_mid_l.stl"/>
+        <xacro:taxel_macro idx="1" mesh="${mesh_dir}/fabric/tax_mid_r.stl"/>
       </tactile>
     </sensor>
     
@@ -113,10 +113,11 @@
 
   </xacro:macro>
 
-  <xacro:macro name="palm_tactile"
-               params="prefix:=^|'' reflect:=^|1">
+  <!-- fabric based sensor by Gereon Buescher -->
+  <xacro:macro name="palm_tactile_fabric"
+               params="prefix:=^|'' reflect:=^|1 ">
     <xacro:property name="taxel_dir" value="$(find sr_description)/hand/xacro/palm"/>
-    <xacro:property name="taxel_data" value="${load_yaml(taxel_dir + '/metacarpal.taxels.ubi.yaml')}"/>
+    <xacro:property name="taxel_data" value="${load_yaml(taxel_dir + '/metacarpal.taxels.ubi.fabric.yaml')}"/>
     <xacro:property name="link" value="${prefix}lfmetacarpal"/>
 
     <!-- default finger and data properties to allow calling tactile_default_params -->
@@ -130,28 +131,120 @@
       <parent link="${link}" />
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <tactile channel="${prefix}lfmetacarpal">
-        <xacro:taxel_macro idx="0" mesh="${mesh_dir}/tax_metac_upper.stl"/>
-        <xacro:taxel_macro idx="1" mesh="${mesh_dir}/tax_metac_lower.stl"/>
-        <xacro:taxel_macro idx="2" mesh="${mesh_dir}/tax_metac_side.stl"/>
+        <xacro:taxel_macro idx="0" mesh="${mesh_dir}/fabric/tax_metac_upper.stl"/>
+        <xacro:taxel_macro idx="1" mesh="${mesh_dir}/fabric/tax_metac_lower.stl"/>
+        <xacro:taxel_macro idx="2" mesh="${mesh_dir}/fabric/tax_metac_side.stl"/>
       </tactile>
     </sensor>
 
     <!-- taxels attached to palm -->
-    <xacro:property name="taxel_data" value="${load_yaml(taxel_dir + '/palm.taxels.ubi.yaml')}"/>
+    <xacro:property name="taxel_data" value="${load_yaml(taxel_dir + '/palm.taxels.ubi.fabric.yaml')}"/>
     <xacro:property name="link" value="${prefix}palm"/>
     <sensor name="${prefix}palm_sensor" update_rate="100" group="palm">
       <parent link="${link}" />
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <tactile channel="${prefix}palm">
-        <xacro:taxel_macro idx="0" mesh="${mesh_dir}/tax_palm_up_r.stl"/>
-        <xacro:taxel_macro idx="1" mesh="${mesh_dir}/tax_palm_up_mid.stl"/>
-        <xacro:taxel_macro idx="2" mesh="${mesh_dir}/tax_palm_up_l.stl"/>
-        <xacro:taxel_macro idx="3" mesh="${mesh_dir}/tax_palm_center_r.stl"/>
-        <xacro:taxel_macro idx="4" mesh="${mesh_dir}/tax_palm_center_l.stl"/>
-        <xacro:taxel_macro idx="5" mesh="${mesh_dir}/tax_palm_center_mid.stl"/>
-        <xacro:taxel_macro idx="6" mesh="${mesh_dir}/tax_palm_down_r.stl"/>
-        <xacro:taxel_macro idx="7" mesh="${mesh_dir}/tax_palm_down_l.stl"/>
-        <xacro:taxel_macro idx="8" mesh="${mesh_dir}/tax_palm_side.stl"/>
+        <xacro:taxel_macro idx="0" mesh="${mesh_dir}/fabric/tax_palm_up_r.stl"/>
+        <xacro:taxel_macro idx="1" mesh="${mesh_dir}/fabric/tax_palm_up_mid.stl"/>
+        <xacro:taxel_macro idx="2" mesh="${mesh_dir}/fabric/tax_palm_up_l.stl"/>
+        <xacro:taxel_macro idx="3" mesh="${mesh_dir}/fabric/tax_palm_center_r.stl"/>
+        <xacro:taxel_macro idx="4" mesh="${mesh_dir}/fabric/tax_palm_center_l.stl"/>
+        <xacro:taxel_macro idx="5" mesh="${mesh_dir}/fabric/tax_palm_center_mid.stl"/>
+        <xacro:taxel_macro idx="6" mesh="${mesh_dir}/fabric/tax_palm_down_r.stl"/>
+        <xacro:taxel_macro idx="7" mesh="${mesh_dir}/fabric/tax_palm_down_l.stl"/>
+        <xacro:taxel_macro idx="8" mesh="${mesh_dir}/fabric/tax_palm_side.stl"/>
+      </tactile>
+    </sensor>
+  </xacro:macro>
+  
+  <!-- barometric based sensor by Tobias Schwank -->
+  <xacro:macro name="palm_tactile_baro"
+               params="prefix:=^|'' reflect:=^|1 ">
+    <xacro:property name="taxel_dir" value="$(find sr_description)/hand/xacro/palm"/>
+    <xacro:property name="taxel_data" value="${load_yaml(taxel_dir + '/palm.taxels.ubi.baro.yaml')}"/>
+    <xacro:property name="link" value="${prefix}lfmetacarpal"/>
+
+    <!-- default finger and data properties to allow calling tactile_default_params -->
+    <xacro:property name="finger" value="palm"/>
+    <xacro:tactile_default_params _link=""/>
+    <!-- left palm marker meshes need to be reflected -->
+    <xacro:property name="mesh_scale" value="${-1.0*reflect*0.00101} 0.00101 0.00101"/>
+
+    <!-- taxels attached to lfmetacarpal -->
+    <sensor name="${prefix}lfmetacarpal_sensor" update_rate="200" group="palm">
+      <parent link="${link}" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <tactile channel="palm_baro_array"> <!-- ${prefix} -->
+        <xacro:taxel_macro idx="50" mesh="${mesh_dir}/baro/metacarpal_51.stl"/>
+        <xacro:taxel_macro idx="51" mesh="${mesh_dir}/baro/metacarpal_52.stl"/>
+        <xacro:taxel_macro idx="52" mesh="${mesh_dir}/baro/metacarpal_53.stl"/>
+        <xacro:taxel_macro idx="53" mesh="${mesh_dir}/baro/metacarpal_54.stl"/>
+        <xacro:taxel_macro idx="54" mesh="${mesh_dir}/baro/metacarpal_55.stl"/>
+        <xacro:taxel_macro idx="55" mesh="${mesh_dir}/baro/metacarpal_56.stl"/>
+        <xacro:taxel_macro idx="56" mesh="${mesh_dir}/baro/metacarpal_57.stl"/>
+        <xacro:taxel_macro idx="57" mesh="${mesh_dir}/baro/metacarpal_58.stl"/>
+        <xacro:taxel_macro idx="58" mesh="${mesh_dir}/baro/metacarpal_59.stl"/>
+        <xacro:taxel_macro idx="59" mesh="${mesh_dir}/baro/metacarpal_60.stl"/>
+      </tactile>
+    </sensor>
+
+    <!-- taxels attached to palm -->
+
+    <xacro:property name="link" value="${prefix}palm"/>
+    <sensor name="${prefix}palm_sensor" update_rate="200" group="palm">
+      <parent link="${link}" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <tactile channel="palm_baro_array"> <!-- ${prefix} -->
+        <xacro:taxel_macro idx="0" mesh="${mesh_dir}/baro/palm_01.stl"/>
+        <xacro:taxel_macro idx="1" mesh="${mesh_dir}/baro/palm_02.stl"/>
+        <xacro:taxel_macro idx="2" mesh="${mesh_dir}/baro/palm_03.stl"/>
+        <xacro:taxel_macro idx="3" mesh="${mesh_dir}/baro/palm_04.stl"/>
+        <xacro:taxel_macro idx="4" mesh="${mesh_dir}/baro/palm_05.stl"/>
+        <xacro:taxel_macro idx="5" mesh="${mesh_dir}/baro/palm_06.stl"/>
+        <xacro:taxel_macro idx="6" mesh="${mesh_dir}/baro/palm_07.stl"/>
+        <xacro:taxel_macro idx="7" mesh="${mesh_dir}/baro/palm_08.stl"/>
+        <xacro:taxel_macro idx="8" mesh="${mesh_dir}/baro/palm_09.stl"/>
+        <xacro:taxel_macro idx="9" mesh="${mesh_dir}/baro/palm_10.stl"/>
+        <xacro:taxel_macro idx="10" mesh="${mesh_dir}/baro/palm_11.stl"/>
+        <xacro:taxel_macro idx="11" mesh="${mesh_dir}/baro/palm_12.stl"/>
+        <xacro:taxel_macro idx="12" mesh="${mesh_dir}/baro/palm_13.stl"/>
+        <xacro:taxel_macro idx="13" mesh="${mesh_dir}/baro/palm_14.stl"/>
+        <xacro:taxel_macro idx="14" mesh="${mesh_dir}/baro/palm_15.stl"/>
+        <xacro:taxel_macro idx="15" mesh="${mesh_dir}/baro/palm_16.stl"/>
+        <xacro:taxel_macro idx="16" mesh="${mesh_dir}/baro/palm_17.stl"/>
+        <xacro:taxel_macro idx="17" mesh="${mesh_dir}/baro/palm_18.stl"/>
+        <xacro:taxel_macro idx="18" mesh="${mesh_dir}/baro/palm_19.stl"/>
+        <xacro:taxel_macro idx="19" mesh="${mesh_dir}/baro/palm_20.stl"/>
+        <xacro:taxel_macro idx="20" mesh="${mesh_dir}/baro/palm_21.stl"/>
+        <xacro:taxel_macro idx="21" mesh="${mesh_dir}/baro/palm_22.stl"/>
+        <xacro:taxel_macro idx="22" mesh="${mesh_dir}/baro/palm_23.stl"/>
+        <xacro:taxel_macro idx="23" mesh="${mesh_dir}/baro/palm_24.stl"/>
+        <xacro:taxel_macro idx="24" mesh="${mesh_dir}/baro/palm_25.stl"/>
+        <xacro:taxel_macro idx="25" mesh="${mesh_dir}/baro/palm_26.stl"/>
+        <xacro:taxel_macro idx="26" mesh="${mesh_dir}/baro/palm_27.stl"/>
+        <xacro:taxel_macro idx="27" mesh="${mesh_dir}/baro/palm_28.stl"/>
+        <xacro:taxel_macro idx="28" mesh="${mesh_dir}/baro/palm_29.stl"/>
+        <xacro:taxel_macro idx="29" mesh="${mesh_dir}/baro/palm_30.stl"/>
+        <xacro:taxel_macro idx="30" mesh="${mesh_dir}/baro/palm_31.stl"/>
+        <xacro:taxel_macro idx="31" mesh="${mesh_dir}/baro/palm_32.stl"/>
+        <xacro:taxel_macro idx="32" mesh="${mesh_dir}/baro/palm_33.stl"/>
+        <xacro:taxel_macro idx="33" mesh="${mesh_dir}/baro/palm_34.stl"/>
+        <xacro:taxel_macro idx="34" mesh="${mesh_dir}/baro/palm_35.stl"/>
+        <xacro:taxel_macro idx="35" mesh="${mesh_dir}/baro/palm_36.stl"/>
+        <xacro:taxel_macro idx="36" mesh="${mesh_dir}/baro/palm_37.stl"/>
+        <xacro:taxel_macro idx="37" mesh="${mesh_dir}/baro/palm_38.stl"/>
+        <xacro:taxel_macro idx="38" mesh="${mesh_dir}/baro/palm_39.stl"/>
+        <xacro:taxel_macro idx="39" mesh="${mesh_dir}/baro/palm_40.stl"/>
+        <xacro:taxel_macro idx="40" mesh="${mesh_dir}/baro/palm_41.stl"/>
+        <xacro:taxel_macro idx="41" mesh="${mesh_dir}/baro/palm_42.stl"/>
+        <xacro:taxel_macro idx="42" mesh="${mesh_dir}/baro/palm_43.stl"/>
+        <xacro:taxel_macro idx="43" mesh="${mesh_dir}/baro/palm_44.stl"/>
+        <xacro:taxel_macro idx="44" mesh="${mesh_dir}/baro/palm_45.stl"/>
+        <xacro:taxel_macro idx="45" mesh="${mesh_dir}/baro/palm_46.stl"/>
+        <xacro:taxel_macro idx="46" mesh="${mesh_dir}/baro/palm_47.stl"/>
+        <xacro:taxel_macro idx="47" mesh="${mesh_dir}/baro/palm_48.stl"/>
+        <xacro:taxel_macro idx="48" mesh="${mesh_dir}/baro/palm_49.stl"/>
+        <xacro:taxel_macro idx="49" mesh="${mesh_dir}/baro/palm_50.stl"/>
       </tactile>
     </sensor>
     
