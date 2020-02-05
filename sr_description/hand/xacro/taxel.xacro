@@ -7,7 +7,7 @@
        mesh: mesh resource
        mesh_scale: 3-dim vector for mesh scaling
   -->
-  <xacro:macro name="xacro:taxel_macro"
+  <xacro:macro name="taxel_macro"
                params="idx taxel_data:=^
                        mesh:=^ mesh_scale:=^">
     <taxel idx="${idx}"
