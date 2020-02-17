@@ -9,7 +9,7 @@
     <!-- mesh parameters -->
     <xacro:property name="mesh_dir" value="package://sr_description/hand/model/ubi_tactiles" scope="parent"/>
     <xacro:property name="mesh_scale" value="0.00101 0.00101 0.00101" scope="parent"/>
-    <!-- <xacro:property name="origin" scope="parent"><origin xyz="0 0 0" rpy="0 0 0"/></xacro:property>-->
+    <!-- xacro:property name="origin" scope="parent"><origin xyz="0 0 0" rpy="0 0 0"/></xacro:property-->
 
     <xacro:if value="${link == ''}">
       <xacro:property name="link" value="${prefix}${finger}${_link}" scope="parent"/>
