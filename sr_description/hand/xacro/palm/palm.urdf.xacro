@@ -14,7 +14,7 @@ xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom">
   <!-- reflect is either 1 (for right hand) or -1 (for left hand) -->
   <!-- parent is the parent link for the joint -->
   <xacro:macro name="palm"
-  params="muscletrans prefix reflect parent">
+  params="muscletrans:=^ prefix:=^ reflect:=^ parent">
     <link name="${prefix}palm">
       <inertial>
         <origin xyz="0 0 0.035" rpy="0 0 0" />
@@ -108,10 +108,9 @@ xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom">
       <implicitSpringDamper>1</implicitSpringDamper>
     </gazebo>
     <!--imu-->
-    <xacro:imu_sensor prefix="${prefix}"/>
+    <xacro:imu_sensor />
     <!-- extensions -->
-    <xacro:shadowhand_palm_transmission muscletrans="${muscletrans}"
-    prefix="${prefix}" />
-    <xacro:shadowhand_palm_gazebo prefix="${prefix}" />
+    <xacro:shadowhand_palm_transmission />
+    <xacro:shadowhand_palm_gazebo />
   </xacro:macro>
 </robot>

@@ -1,0 +1,32 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- for backward compatibility define new params from old ones -->
+
+  <xacro:property name="old_tip_sensor" value="${(1 if bio==True else 0) + (1 if bt_sp==True else 0) + (1 if ubi==True else 0) + (1 if eli==True else 0)}"/> 
+  <!-- if old parameters are used, valid only if sum is 1 -->
+  <xacro:if value="${old_tip_sensor==1}">
+    <xacro:if value="${bio}">
+      <xacro:property name="palm_sensor" value="standard"/>
+      <xacro:property name="prox_sensor" value="standard"/>
+      <xacro:property name="mid_sensor" value="bio"/>
+      <xacro:property name="tip_sensor" value="bio"/>
+    </xacro:if>
+    <xacro:if value="${bt_sp}">
+      <xacro:property name="palm_sensor" value="standard"/>
+      <xacro:property name="prox_sensor" value="standard"/>
+      <xacro:property name="mid_sensor" value="standard"/>
+      <xacro:property name="tip_sensor" value="bt_sp"/>
+    </xacro:if>
+    <xacro:if value="${ubi}">
+      <xacro:property name="palm_sensor" value="ubi_fabric"/>
+      <xacro:property name="prox_sensor" value="ubi"/>
+      <xacro:property name="mid_sensor" value="ubi"/>
+      <xacro:property name="tip_sensor" value="ubi"/>
+    </xacro:if>
+    <xacro:if value="${eli}">
+      <xacro:property name="palm_sensor" value="standard"/>
+      <xacro:property name="prox_sensor" value="standard"/>
+      <xacro:property name="mid_sensor" value="standard"/>
+      <xacro:property name="tip_sensor" value="eli"/>
+    </xacro:if>
+  </xacro:if>
+</robot>

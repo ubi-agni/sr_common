@@ -8,6 +8,13 @@ SIMULATED=0  MUSCLE=0  BIOTAC_HAND=0  ELLIPSOID=0  ONE_FINGER=0  THREE_FINGER=0 
 echo "ready to test shadowhand_left_motor.urdf"
 read -p "Press [Enter] key "
 SIMULATED=0  MUSCLE=0  BIOTAC_HAND=0  ELLIPSOID=0  ONE_FINGER=0  THREE_FINGER=0  LEFT_HAND=1   roslaunch sr_description test_hand_models.launch   #shadowhand_left_motor.urdf
+echo "ready to test shadowhand_lite.urdf"
+read -p "Press [Enter] key "
+SIMULATED=0  MUSCLE=0  BIOTAC_HAND=0  ELLIPSOID=0  ONE_FINGER=0  THREE_FINGER=0  LEFT_HAND=0  LITE=1  roslaunch sr_description test_hand_models.launch   #shadowhand_lite.urdf
+echo "ready to test shadowhand_extra_lite.urdf"
+read -p "Press [Enter] key "
+SIMULATED=0  MUSCLE=0  BIOTAC_HAND=0  ELLIPSOID=0  ONE_FINGER=0  THREE_FINGER=0  LEFT_HAND=0  LITE=1 EXTRA_LITE=1 roslaunch sr_description test_hand_models.launch   #shadowhand_extra_lite.urdf
+
 
 echo "ready to test shadowhand_motor_ellipsoid.urdf"
 read -p "Press [Enter] key "

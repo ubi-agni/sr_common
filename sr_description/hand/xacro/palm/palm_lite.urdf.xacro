@@ -13,7 +13,7 @@ xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom">
   <!-- reflect is either 1 (for right hand) or -1 (for left hand) -->
   <!-- parent is the parent link for the joint -->
   <xacro:macro name="palm"
-  params="muscletrans prefix reflect parent">
+  params="muscletrans:=^ prefix:=^ reflect:=^ parent">
     <link name="${prefix}palm">
       <inertial>
         <origin xyz="0 0 0.035" rpy="0 0 0" />
@@ -88,7 +88,7 @@ xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom">
     <link name="${prefix}manipulator" />
     <!-- No wrist joints in a Lite palm -->
     <!-- extensions -->
-    <xacro:imu_sensor prefix="${prefix}" />
-    <xacro:shadowhand_palm_gazebo prefix="${prefix}" />
+    <xacro:imu_sensor />
+    <xacro:shadowhand_palm_gazebo />
   </xacro:macro>
 </robot>
