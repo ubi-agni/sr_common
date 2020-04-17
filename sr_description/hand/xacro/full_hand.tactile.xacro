@@ -1,24 +1,17 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <!-- Create <tactile> tags describing the taxels
-       tactile: sensor type
+       tip_sensor: sensor type
        prefix:  hand prefix, usually rh_ or lh_
        reflect: +1 / -1 to indicate right / left hand
   -->
   <xacro:macro name="shadowhand_tactile"
-               params="tactile:=^ reflect:=^|1 prefix:=^|'' lf:=^|1 palm_tactile:=^|fabric">
-    <xacro:if value="${tactile in ['ubi']}">
+               params="tip_sensor:=^ reflect:=^|1 prefix:=^|'' lf:=^|1 prox_sensor:=^|ubi mid_sensor:=^|ubi palm_sensor:=^|ubi_fabric">
+    <xacro:if value="${'ubi' in [tip_sensor, prox_sensor, mid_sensor] or palm_sensor in ['ubi_fabric', 'ubi_baro']}">
       <!-- load macros specific to sensor type -->
-      <xacro:include filename="$(find sr_description)/hand/xacro/tactile.${tactile}.xacro"/>
+      <xacro:include filename="$(find sr_description)/hand/xacro/tactile.ubi.xacro"/>
 
-      <!-- Palm  fabric or baro -->
-      <xacro:if value="${palm_tactile in ['fabric']}">
-        <xacro:palm_tactile_fabric/>
-      </xacro:if>
-      <xacro:if value="${palm_tactile in ['baro']}">
-        <xacro:palm_tactile_baro/>
-      </xacro:if>
-
+      <!-- finger tactile -->
       <!-- First Finger -->
       <xacro:finger_tactile finger="ff"/>
       <!-- Middle Finger -->
@@ -31,6 +24,15 @@
       </xacro:if>
       <!-- Thumb  -->
       <xacro:thumb_tactile/>
+
+      <!-- palm tactile -->
+      <!--  fabric or baro -->
+      <xacro:if value="${palm_sensor in ['ubi_fabric']}">
+        <xacro:palm_tactile_fabric/>
+      </xacro:if>
+      <xacro:if value="${palm_sensor in ['ubi_baro']}">
+        <xacro:palm_tactile_baro/>
+      </xacro:if>
     </xacro:if>
   </xacro:macro>
 
