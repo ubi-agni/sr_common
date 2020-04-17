@@ -15,10 +15,11 @@ name="shadowhand_motor">
     <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
   </joint>
   <!-- UBI sensors -->
-  <xacro:shadowhand muscletrans="false" muscle="false" bio="false" bt_sp="false"
-  ubi="true" eli="false" reflect="1.0" prefix="rh_" lf="true" />
+  <xacro:shadowhand muscletrans="false" muscle="false" tip_sensor="ubi" prox_sensor="ubi" 
+                    mid_sensor="ubi" palm_sensor="ubi_fabric" reflect="1.0" prefix="rh_" lf="true" />
 
   <!-- add tactile markers -->
-  <xacro:shadowhand_tactile tactile="ubi" reflect="1.0" prefix="rh_" lf="true" />
+  <xacro:shadowhand_tactile tip_sensor="ubi" prox_sensor="ubi" mid_sensor="ubi" 
+                            palm_sensor="ubi_fabric" reflect="1.0" prefix="rh_" lf="true" />
 
 </robot>
