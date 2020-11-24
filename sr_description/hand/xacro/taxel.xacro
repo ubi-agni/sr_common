@@ -9,10 +9,17 @@
   -->
   <xacro:macro name="taxel_macro"
                params="idx taxel_data:=^
-                       mesh:=^ mesh_scale:=^">
+                       mesh:=^ mesh_scale:=^
+                       reflect:=1">
     <taxel idx="${idx}"
-           xyz="${' '.join([str(v) for v in taxel_data['positions'][idx]])}"
-           rpy="${' '.join([str(v) for v in taxel_data['orientations'][idx]])}">
+           xyz="${' '.join([str(v) for v in [reflect*taxel_data['positions'][idx][0],
+                                             taxel_data['positions'][idx][1],
+                                             taxel_data['positions'][idx][2]]])}"
+           rpy="${' '.join([str(v) for v in [reflect*taxel_data['orientations'][idx][0],
+                                             taxel_data['orientations'][idx][1],
+                                             taxel_data['orientations'][idx][2] if reflect > 0
+                                             else
+                                             pi-taxel_data['orientations'][idx][2] if taxel_data['orientations'][idx][2] >0 else -pi-taxel_data['orientations'][idx][2] ] ])}">
       <geometry>
         <mesh filename="${mesh}" scale="${mesh_scale}" />
       </geometry>

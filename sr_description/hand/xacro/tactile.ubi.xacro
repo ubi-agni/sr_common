@@ -138,9 +138,9 @@
       <parent link="${link}" />
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <tactile channel="${prefix}lfmetacarpal">
-        <xacro:taxel_macro idx="0" mesh="${mesh_dir}/fabric/tax_metac_upper.stl"/>
-        <xacro:taxel_macro idx="1" mesh="${mesh_dir}/fabric/tax_metac_lower.stl"/>
-        <xacro:taxel_macro idx="2" mesh="${mesh_dir}/fabric/tax_metac_side.stl"/>
+        <xacro:taxel_macro idx="0" reflect="${reflect}" mesh="${mesh_dir}/fabric/tax_metac_upper.stl"/>
+        <xacro:taxel_macro idx="1" reflect="${reflect}" mesh="${mesh_dir}/fabric/tax_metac_lower.stl"/>
+        <xacro:taxel_macro idx="2" reflect="${reflect}" mesh="${mesh_dir}/fabric/tax_metac_side.stl"/>
       </tactile>
     </sensor>
 
@@ -151,15 +151,15 @@
       <parent link="${link}" />
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <tactile channel="${prefix}palm">
-        <xacro:taxel_macro idx="0" mesh="${mesh_dir}/fabric/tax_palm_up_r.stl"/>
-        <xacro:taxel_macro idx="1" mesh="${mesh_dir}/fabric/tax_palm_up_mid.stl"/>
-        <xacro:taxel_macro idx="2" mesh="${mesh_dir}/fabric/tax_palm_up_l.stl"/>
-        <xacro:taxel_macro idx="3" mesh="${mesh_dir}/fabric/tax_palm_center_r.stl"/>
-        <xacro:taxel_macro idx="4" mesh="${mesh_dir}/fabric/tax_palm_center_l.stl"/>
-        <xacro:taxel_macro idx="5" mesh="${mesh_dir}/fabric/tax_palm_center_mid.stl"/>
-        <xacro:taxel_macro idx="6" mesh="${mesh_dir}/fabric/tax_palm_down_r.stl"/>
-        <xacro:taxel_macro idx="7" mesh="${mesh_dir}/fabric/tax_palm_down_l.stl"/>
-        <xacro:taxel_macro idx="8" mesh="${mesh_dir}/fabric/tax_palm_side.stl"/>
+        <xacro:taxel_macro idx="0" reflect="${reflect}" mesh="${mesh_dir}/fabric/tax_palm_up_r.stl"/>
+        <xacro:taxel_macro idx="1" reflect="${reflect}" mesh="${mesh_dir}/fabric/tax_palm_up_mid.stl"/>
+        <xacro:taxel_macro idx="2" reflect="${reflect}" mesh="${mesh_dir}/fabric/tax_palm_up_l.stl"/>
+        <xacro:taxel_macro idx="3" reflect="${reflect}" mesh="${mesh_dir}/fabric/tax_palm_center_r.stl"/>
+        <xacro:taxel_macro idx="4" reflect="${reflect}" mesh="${mesh_dir}/fabric/tax_palm_center_l.stl"/>
+        <xacro:taxel_macro idx="5" reflect="${reflect}" mesh="${mesh_dir}/fabric/tax_palm_center_mid.stl"/>
+        <xacro:taxel_macro idx="6" reflect="${reflect}" mesh="${mesh_dir}/fabric/tax_palm_down_r.stl"/>
+        <xacro:taxel_macro idx="7" reflect="${reflect}" mesh="${mesh_dir}/fabric/tax_palm_down_l.stl"/>
+        <xacro:taxel_macro idx="8" reflect="${reflect}" mesh="${mesh_dir}/fabric/tax_palm_side.stl"/>
       </tactile>
     </sensor>
   </xacro:macro>
